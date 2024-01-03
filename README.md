@@ -10,6 +10,10 @@ The website of the famous detective **Sherlock Holmes**, this website will help 
 
 The project is live [here!](https://the-science-of-deduction-gregor-vm.vercel.app/)
 
+### Capture
+
+![The Science of Deduction Capture](/public/capture.jpg)
+
 ## How does this works under the hood? 🔬
 
 On the repo there is a document called _data.ts_ (in _src/utils/data.ts_) in which there's a list of object following the format:
