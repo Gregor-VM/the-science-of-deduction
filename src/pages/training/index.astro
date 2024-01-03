@@ -16,9 +16,9 @@ import { constants } from "../../utils/constants";
       can try to guess as much as you can from an image that people has posted
       on subreddits like
 
-      <Link href={constants.subreddit} title="thescienceofdeduction" /> or some
-      that our contributors have made for this puzzle collection. You can simple
-      type your guesses, an AI will tell if you are correct or not.
+      <Link href={constants.subreddit} title="thescienceofdeduction" /> or some that
+      our contributors have made for this puzzle collection. You can simple type
+      your guesses, an AI will tell if you are correct or not.
     </p>
 
     <section>
@@ -34,7 +34,7 @@ import { constants } from "../../utils/constants";
                     Type[key as keyof typeof Type] as keyof typeof TypeTitles
                   ]
                 }
-                href={`training/${Type[key as keyof typeof Type]}/0`}
+                href={`/training/${Type[key as keyof typeof Type]}/0`}
               />
             );
           })
