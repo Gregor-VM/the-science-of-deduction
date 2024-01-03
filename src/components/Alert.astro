@@ -53,7 +53,7 @@ const { class: className } = Astro.props;
 
 <script defer>
   const closeBtnElement = document.getElementById("closeBtn");
-  closeBtnElement.addEventListener("click", (e) => {
+  closeBtnElement.addEventListener("click", () => {
     const alertElement = document.getElementById("alert");
     alertElement.style.display = "none";
   });
