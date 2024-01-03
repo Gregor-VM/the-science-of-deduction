@@ -1,0 +1,45 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Link from "../../components/Link.astro";
+import Category from "../../components/Category.astro";
+import { Type, TypeTitles } from "../../utils/data";
+import { constants } from "../../utils/constants";
+---
+
+<Layout title="The Science of Deduction | Training">
+  <main class="md:px-36 px-10 min-h-screen bg-slate-800 py-8">
+    <h1 class="text-3xl text-center font-bold py-8">
+      Welcome to the training section!
+    </h1>
+    <p class="text-lg">
+      In this section you can train you <strong>observation skills</strong>, you
+      can try to guess as much as you can from an image that people has posted
+      on subreddits like
+
+      <Link href={constants.subreddit} title="thescienceofdeduction" /> or some
+      that our contributors have made for this puzzle collection. You can simple
+      type your guesses, an AI will tell if you are correct or not.
+    </p>
+
+    <section>
+      <h2 class="text-xl font-bold opacity-80 mb-8">Select the category</h2>
+
+      <div class="grid grid-cols-2 md:grid-cols-6 gap-3">
+        {
+          Object.keys(Type).map((key) => {
+            return (
+              <Category
+                title={
+                  TypeTitles[
+                    Type[key as keyof typeof Type] as keyof typeof TypeTitles
+                  ]
+                }
+                href={`training/${Type[key as keyof typeof Type]}/0`}
+              />
+            );
+          })
+        }
+      </div>
+    </section>
+  </main>
+</Layout>

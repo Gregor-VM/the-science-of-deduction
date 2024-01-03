@@ -1,0 +1,125 @@
+---
+import Image from "../../../components/Image.astro";
+import Layout from "../../../layouts/Layout.astro";
+import data, { Type } from "../../../utils/data";
+
+interface Paths {
+  params: {
+    category: Type;
+    index: number | string;
+  };
+}
+
+function nextItemLink() {
+  return `/training/${category}/${parseInt(index as string) + 1}`;
+}
+
+function haveNextItem() {
+  let filteredData = data.filter((item) => item.type === category);
+  if (category === Type.all) {
+    filteredData = data;
+  }
+
+  return filteredData.length > parseInt(index as string) + 1;
+}
+
+function getItem(): (typeof data)[0] {
+  let filteredData = data.filter((item) => item.type === category);
+  if (category === Type.all) {
+    filteredData = data;
+  }
+
+  return filteredData[index as number];
+}
+
+export function getStaticPaths() {
+  const paths: Paths[] = [];
+
+  Object.keys(Type).forEach((key) => {
+    let filteredData = data.filter(
+      (item) => item.type === Type[key as keyof typeof Type]
+    );
+    if (key === Type.all) {
+      filteredData = data;
+    }
+
+    const typePaths: Paths[] = filteredData.map((_, index) => {
+      return { params: { category: Type[key as keyof typeof Type], index } };
+    });
+
+    paths.push(...typePaths);
+  });
+
+  return paths;
+}
+
+const { category, index } = Astro.params;
+
+const item = getItem();
+---
+
+<Layout title="The Science of Deduction | training">
+  <main class="md:px-36 px-10 min-h-screen bg-slate-800">
+    <input type="hidden" id="facts" value={item.facts} />
+
+    <h1 class="text-2xl font-bold opacity-80 pt-3">
+      What can you deduce based on this photo?
+    </h1>
+
+    <div class="flex justify-between gap-3 flex-col md:flex-row">
+      <Image class="w-full mb-4" src={item.image} title={item.type} />
+
+      <form
+        id="guessForm"
+        class="flex flex-col gap-3 w-full mb-6 md:mb-0 md:max-w-80"
+      >
+        <textarea
+          id="prompt"
+          rows="10"
+          oninput="auto_grow(this)"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 overflow-hidden resize-none"
+          placeholder="You are y-x years old, male, you have..."></textarea>
+
+        <div>
+          <textarea
+            id="response"
+            rows="8"
+            disabled
+            oninput="auto_grow(this)"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 overflow-hidden resize-none"
+            placeholder="When you're ready you feedback will be here"
+          ></textarea>
+
+          <div class="flex mt-3 gap-3">
+            <button
+              type="submit"
+              id="submit"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hidden w-full disabled:bg-slate-500 disabled:hover:disabled:bg-slate-500"
+              >Submit</button
+            >
+            {
+              haveNextItem() && (
+                <a
+                  href={nextItemLink()}
+                  id="next"
+                  class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 w-full"
+                >
+                  Next
+                </a>
+              )
+            }
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+</Layout>
+
+<script defer>
+  function auto_grow(element) {
+    element.style.height = "13.85rem";
+    element.style.height = element.scrollHeight + "px";
+  }
+</script>
+
+<script src="./llama.ts"></script>

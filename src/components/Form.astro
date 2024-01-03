@@ -1,0 +1,79 @@
+---
+import EmailIcon from "../icons/EmailIcon.astro";
+import Alert from "../components/Alert.astro";
+---
+
+<form
+  id="form"
+  action="#"
+  class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+>
+  <label
+    for="email"
+    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+    >Your Email</label
+  >
+  <div class="relative mb-6">
+    <div
+      class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"
+    >
+      <EmailIcon />
+    </div>
+    <input
+      type="text"
+      id="email"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      placeholder="mail@example.com"
+    />
+  </div>
+
+  <div>
+    <label
+      for="case"
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >Your (hopefully) very interesting case</label
+    >
+    <div class="relative mb-6">
+      <textarea
+        id="case"
+        rows="10"
+        oninput="auto_grow(this)"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 overflow-hidden resize-none"
+        placeholder="I have a problem regarding..."></textarea>
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    class="mx-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hidden md:block"
+    >Submit</button
+  >
+  <Alert class="mt-4">Your case was succefully sent to SH.</Alert>
+</form>
+
+<script defer>
+  function auto_grow(element) {
+    element.style.height = "13.85rem";
+    element.style.height = element.scrollHeight + "px";
+  }
+
+  const formElement = document.getElementById("form");
+
+  const alertElement = document.getElementById("alert");
+  alertElement.style.display = "none";
+
+  formElement.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const emailElement = document.getElementById("email");
+    const caseElement = document.getElementById("case");
+
+    alertElement.style.display = "flex";
+
+    emailElement.value = "";
+    caseElement.value = "";
+
+    setTimeout(() => {
+      alertElement.style.display = "none";
+    }, 3000);
+  });
+</script>

@@ -1,0 +1,58 @@
+---
+import EyeIcon from "../icons/EyeIcon.astro";
+
+interface Props {
+  src: string;
+  title: string;
+  class: string;
+}
+
+const { src, title } = Astro.props;
+---
+
+<div
+  id="image-modal"
+  tabindex="-1"
+  aria-hidden="true"
+  class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] min-h-screen bg-zinc-950/80"
+  style="margin: 0"
+  onclick="toggleImageModal()"
+>
+  <div class="relative p-4 w-full max-h-full">
+    <img id="visualized-image" class="w-11/12 md:w-7/12 mx-auto" src={src} />
+  </div>
+</div>
+
+<div
+  class=`relative inline-block group w-fit h-fit ${Astro.props.class}`
+  onclick="toggleImageModal()"
+>
+  <div
+    class="absolute top-0 left-0 grid content-center
+    w-full h-full group-hover:opacity-20 opacity-0 bg-zinc-950"
+  >
+    <EyeIcon class="m-12 h-12 mx-auto text-white" />
+  </div>
+  <img src={src} title={title} />
+</div>
+
+<script defer>
+  const modalImage = document.getElementById("image-modal");
+
+  function toggleImageModal() {
+    if (modalImage.classList.contains("hidden")) {
+      modalImage.classList.remove("hidden");
+      modalImage.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    } else {
+      modalImage.classList.add("hidden");
+      modalImage.classList.remove("flex");
+      document.body.style.overflow = "visible";
+    }
+  }
+
+  const imageElement = document.getElementById("visualized-image");
+  imageElement.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+</script>

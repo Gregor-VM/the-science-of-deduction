@@ -1,0 +1,61 @@
+<div class="fixed right-0 bottom-0 m-5 upbtn z-20">
+  <button
+    class="bg-blue-500 hover:bg-blue-600 active:bg-blue-500 active:ring-2 p-2 rounded
+      hover:-translate-y-1 transition-transform duration-200"
+    title="scroll to top"
+    aria-label="scroll to top"
+    onclick="scrollToTop()"
+  >
+    <svg
+      class="w-4 h-4 text-gray-800 dark:text-white"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 10 14"
+    >
+      <path
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M5 13V1m0 0L1 5m4-4 4 4"></path>
+    </svg>
+  </button>
+</div>
+
+<style>
+  .upbtn {
+    animation-timeline: scroll();
+    animation-name: upbtn_animation;
+    transform: translateX(10rem);
+  }
+
+  @keyframes upbtn_animation {
+    0% {
+      opacity: 0;
+      transform: translateX(10rem) rotate(0deg);
+    }
+
+    20% {
+      opacity: 1;
+      transform: translateX(0rem) rotate(360deg);
+    }
+
+    98% {
+      opacity: 1;
+      transform: translate(0rem);
+      transform: translateX(0rem) rotate(360deg);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateX(10rem) rotate(360deg);
+    }
+  }
+</style>
+
+<script defer>
+  function scrollToTop() {
+    window.scroll({ behavior: "smooth", top: 0, left: 0 });
+  }
+</script>

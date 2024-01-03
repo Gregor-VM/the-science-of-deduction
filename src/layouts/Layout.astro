@@ -1,0 +1,46 @@
+---
+import Footer from "../components/Footer.astro";
+import NavBar from "../components/NavBar.astro";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="The website of the famous detective Sherlock Holmes, this website will help train you observation and deductive skills in the training section. You will be provided with an image and you will have all the time to try to rack you brain and guess as most information as you can. An AI assitant will tell what of the information that you provided is known to be correct."
+    />
+    <meta
+      name="keywords"
+      content="the science of deduction, sherlock, holmes, observation, training, deduction, detective, private, method, deductive skills, AI, open source"
+    />
+    <link rel="icon" type="image/x-icon" href="/logo.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-gray-900">
+    <NavBar />
+    <slot />
+    <Footer />
+  </body>
+</html>
+<style is:global>
+  @media (prefers-color-scheme: dark) {
+    html {
+      color-scheme: dark;
+    }
+  }
+
+  p,
+  h1 {
+    margin-bottom: 0.75rem;
+  }
+</style>

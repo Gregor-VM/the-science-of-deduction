@@ -1,0 +1,30 @@
+---
+interface Props {
+  title: string;
+  image: string;
+}
+
+const { image, title } = Astro.props;
+---
+
+<article
+  class="bg-white border border-gray-200 rounded-lg shadow-2xl shadow-blue-200/50 dark:bg-gray-800/80 dark:border-gray-700 group"
+>
+  <div class="overflow-hidden rounded-tl-lg rounded-tr-lg">
+    <img
+      class="w-full rounded-t-lg bg-cover group-hover:scale-105 duration-200 transition-transform"
+      src={image}
+      alt={title}
+    />
+  </div>
+  <div class="p-5">
+    <h5
+      class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+    >
+      {title}
+    </h5>
+    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+      <slot />
+    </p>
+  </div>
+</article>

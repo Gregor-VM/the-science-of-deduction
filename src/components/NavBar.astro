@@ -1,0 +1,60 @@
+---
+import Token from "./Token.astro";
+---
+
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
+  <div
+    class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4"
+  >
+    <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img src="/logo.ico" class="h-8 mt-1" alt="Flowbite Logo" />
+      <span
+        class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+        >The Science of Deduction</span
+      >
+    </a>
+    <div class="flex items-center space-x-6 rtl:space-x-reverse">
+      <Token />
+    </div>
+  </div>
+</nav>
+<nav class="bg-gray-50 dark:bg-gray-700 border-b-2 border-slate-100/30">
+  <div class="max-w-screen-xl px-4 py-3 mx-auto">
+    <div class="flex items-center">
+      <ul
+        class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm"
+      >
+        <li>
+          <a
+            href="/#home"
+            class="text-gray-900 dark:text-white hover:underline"
+            aria-current="page">Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="/#method"
+            class="text-gray-900 dark:text-white hover:underline">Method</a
+          >
+        </li>
+        <li class="hidden md:block">
+          <a href="/#why" class="text-gray-900 dark:text-white hover:underline"
+            >Why Sherlock?</a
+          >
+        </li>
+        <li>
+          <a
+            href="/training"
+            class="text-gray-900 dark:text-white hover:underline">Training</a
+          >
+        </li>
+        <li>
+          <a
+            href="/#contact"
+            class="text-gray-900 dark:text-white hover:underline">Contact</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
