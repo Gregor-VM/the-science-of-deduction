@@ -8,7 +8,7 @@ The website of the famous detective **Sherlock Holmes**, this website will help 
 
 ### Website
 
-The project is live [here!](https://the-science-of-deduction-gregor-vm.vercel.app/)
+The project is live [here!](https://the-science-of-deduction.netlify.app/)
 
 ### Capture
 
